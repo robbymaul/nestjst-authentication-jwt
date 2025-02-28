@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpException, HttpStatus, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Inject, Post } from '@nestjs/common';
 import { UserService } from '../../../core/user/service/user.service';
 import { LoginUserRequest, RegisterUserRequest, UserResponse } from '../../web/web.user';
 import { WebResponse } from '../../web/web.response';
@@ -6,13 +6,18 @@ import { UserRepository } from '../../../infrastructure/repositories/user.reposi
 import { log, Logger } from 'winston';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
-@Controller('api/users')
+@Controller()
 export class UserController {
   constructor(
     private readonly userService: UserService,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logging: Logger
     ) {}
 
+  @Get("")
+  async helloWorld(): Promise<string> {
+    return "Hello World!";
+  }
+  
   @Post("/register")
   async register(@Body() registerRequest: RegisterUserRequest): Promise<WebResponse<UserResponse>> {
     try {
