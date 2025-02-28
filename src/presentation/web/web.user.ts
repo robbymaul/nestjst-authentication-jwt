@@ -4,9 +4,15 @@ export class RegisterUserRequest {
   name: string;
 }
 
-export class RegisterUserResponse {
-  id: number;
+export class LoginUserRequest {
   username: string;
   password: string;
+}
+
+export class UserResponse {
+  id: number;
+  username: string;
+  password?: string;
   name: string;
+  token?: string;
 }
